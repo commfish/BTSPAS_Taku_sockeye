@@ -25,7 +25,8 @@ https://www.rstudio.com/
 Install JAGS from: https://sourceforge.net/projects/mcmc-jags/files/latest/download.
 
 # Project Folder Setup
-Set up your Rproject to include code, data, document, data/prior_weeks_data, data/*yyyy*_inseason, and output folders. Make sure the .gitignore file contains:
+Set up your Rproject to include code, data, document, data/*yyyy*_inseason, and output folders. Make sure the .gitignore file contains:
+
 ```
 Taku*
 *.csv
@@ -36,6 +37,8 @@ so that ouput and data from inseason estimates is not committed to GitHub.
 The code file that are necessary to run the analysis are the *inseason_analysis.R* file.
 The *inseason_analysis.R* file will also load some helper functions to structure the data for *BTSPAS* and
 to do the actual model fitting.
+
+The code is set up to automatically create the *yyyy*_inseason folder along with the SW*xx* folders in the output.
 
 # Data Setup
 Three csv files should be updated weekly and placed in the data folder in the correct statistical week folder. 
@@ -104,19 +107,24 @@ The data structures include the
 
 # Inseason Estimates for Taku River
 The inputs that need to be specified for the code to run are stat weeks to include in the analysis,
-the year, stat weeks sub folder, sw.randomseed, and the data.directory to store the results.
+the year, year sub folder, stat weeks sub folder, sw.randomseed, and the data.directory to store the results.
 
 These are specified at the top of the *inseason_analysis.R* code in the code fragments:
 ```
+# Weekly Settings
 fw.stat.weeks <- 23:28   # stat weeks with releases and recoveries to  be included
 Year<-2019 # input year
+year.subfolder <- "2019_inseason" #subfolder for forecast through week
 
+# use this to specify a subfolder for this week (in the "data" and "output" folders)
 sw.subfolder <- "SW28" 
-sw.randomseed <- 2328.
+sw.randomseed <- 2328
+
+data.directory <-file.path('data','2019_inseason',sw.subfolder).
 ```
 Select the stat weeks for which you want the BTSPAS to provide estimates on a FW and HW basis.
 Change the above code to account for which stat weeks of data will be used in the estimate. 
-There should be a folder in the data folder for *yyyy*_inseason.
+There should be a folder in the data folder for data/*yyyy*_inseason/SW*xx* where *yyyy* is the assessment year and *xx* is the estimate week.
 
 The Bayesian estimates will differ due to simulation uncertainty when generating the posterior distribution.  
 Bayesian methods use Markov Chain Monte Carlo (MCMC) method which involve simulations from a random number generator. To   "force" the random numbers to be the same across runs ... in the BTSPAS call, there is an argument InitialSeed=xxxxx where you can specify a "random" integer between 1 and 1000000 to force the same random numbers to be used across different run.
