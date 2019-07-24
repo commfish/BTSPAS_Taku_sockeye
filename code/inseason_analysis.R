@@ -14,7 +14,7 @@ if(!dir.exists(file.path("output",year.subfolder))){dir.create(file.path("output
 if(!dir.exists(file.path("output",year.subfolder, sw.subfolder))){dir.create(file.path("output",year.subfolder, sw.subfolder))}
 
 # load libraries
-devtools::install_github("cschwarz-stat-sfu-ca/BTSPAS", dependencies = TRUE, build_vignettes = TRUE) #only load once then comment out
+devtools::install_github("cschwarz-stat-sfu-ca/BTSPAS", dependencies = TRUE, build_vignettes = FALSE) #only load once then comment out
 
 # check if the URL exists (i.e. have internet connection and correct URL)
 library(RCurl)
