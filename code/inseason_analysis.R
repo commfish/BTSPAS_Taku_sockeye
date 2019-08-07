@@ -1,13 +1,13 @@
 # Weekly Settings
-fw.stat.weeks <- 23:29
+fw.stat.weeks <- 23:32
 
 # stat weeks with releases and recoveries to  be included
 Year<-2019 # input year
 year.subfolder <- "2019_inseason" #subfolder for forecast through week
 
 # use this to specify a subfolder for this week (in the "data" and "output" folders)
-sw.subfolder <- "SW29" 
-sw.randomseed <- 2329
+sw.subfolder <- "SW32" 
+sw.randomseed <- 2332
 
 data.directory <-file.path('data','2019_inseason',sw.subfolder)
 if(!dir.exists(file.path("output",year.subfolder))){dir.create(file.path("output",year.subfolder))}
